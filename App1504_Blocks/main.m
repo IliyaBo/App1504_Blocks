@@ -88,6 +88,17 @@ int main(int argc, const char * argv[]) {
         [test testMemory];
         
         
+        NSArray *arr = @[@(1),@(2),@(3),@(4)];
+        
+        
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if(3 == [obj intValue]){
+                NSLog(@"%@", @(idx));
+                //stop = YES;
+            }
+        }];
+        
+        
     }
     return 0;
 }
