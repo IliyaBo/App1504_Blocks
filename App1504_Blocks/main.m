@@ -18,7 +18,9 @@
 
 @end
 
-@interface BlockTestClass()
+@interface BlockTestClass(){
+    NSString *_str2;
+}
 
 @property (nonatomic, copy) NSString *str;
 @property (nonatomic, copy) void (^test)(void);
@@ -32,15 +34,16 @@
     self = [super init];
     if(self){
         _str = @"Hello World";
+        _str2 = @"Hello World";
     }
     return self;
 }
 
 -(void) testMemory{
-    __weak typeof (self) weakSelf = self;
+    __weak typeof (self) weakSelf = self;   //в библе libExtObjc?  можно писать просто @strongify(self);
     self.test = ^void(void){
         __strong typeof (self) strongSelf = weakSelf;
-        NSLog(@"%@", strongSelf.str); // селф держит
+        NSLog(@"%@", strongSelf->_str2); // селф держит
     };
     self.test();
 }
